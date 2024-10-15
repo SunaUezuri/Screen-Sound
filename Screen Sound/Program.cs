@@ -10,11 +10,11 @@ musica1.disponivel = true;
 
 musica2.nome = "Bad Liar";
 musica2.artista = "Imagine Dragons";
+musica2.duracao = 3;
+musica2.disponivel = false;
 
-Console.WriteLine($"Nome da música: {musica1.nome}");
-Console.WriteLine($"Nome do artista: {musica1.artista}");
-Console.WriteLine($"Duração: {musica1.duracao} minutos");
-Console.WriteLine($"Disponível em streamings?: {musica1.disponivel}");
+//Exibindo as informações pelo método
 
-Console.WriteLine($"\nNome da música: {musica2.nome}");
-Console.WriteLine($"Nome do artista: {musica2.artista}");
+musica1.ExibirFichaTecnica();
+Console.WriteLine("\n");
+musica2.ExibirFichaTecnica();
