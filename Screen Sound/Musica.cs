@@ -5,19 +5,12 @@ public class Musica
     public string nome;
     public string artista;
     public int duracao;
-    private bool disponivel;
 
-    //Método para receber o disponível que agora está privado
-    public void EscreveDisponivel(bool valor)
-    {
-        disponivel = valor;
-    }
-
-    //Método para retornar o valor do disponível
-    public bool LeDisponivel()
-    {
-        return disponivel;
-    }
+    /*
+     Ao utilizar get e set o padrão de nomenclatura muda para
+    PascalCase já que ele se torna uma Propriedade
+     */
+    public bool Disponivel {  get; set; }
 
     //Método para exibir as informações da classe
     public void ExibirFichaTecnica()
@@ -25,7 +18,7 @@ public class Musica
         Console.WriteLine($"Nome: {nome}");
         Console.WriteLine($"Artista: {artista}");
         Console.WriteLine($"Duração: {duracao}");
-        if (disponivel)
+        if (Disponivel)
         {
             Console.WriteLine("Música disponível no plano!");
         }
