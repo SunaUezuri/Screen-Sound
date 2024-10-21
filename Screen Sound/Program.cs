@@ -1,27 +1,28 @@
 ﻿//Criando um objeto para a música e Banda:
-Banda imagineDragons = new Banda();
-imagineDragons.Nome = "Imagine Dragons";
+Banda imagineDragons = new Banda("Imagine Dragons");
 
-Musica musica1 = new Musica(imagineDragons);
-Musica musica2 = new Musica(imagineDragons);
-Musica musica3 = new Musica(imagineDragons);
+//Criando a classe música e inserindo suas informações pelo construtor
+Musica musica1 = new Musica(imagineDragons, "It´s Time")
+{
+    //Utiliza-se este tipo de dado para quando as informações não são obrigatórias
+    Duracao = 200,
+    Disponivel = true
+};
 
-//Instanciando as informações
-musica1.Nome = "It´s Time";
-musica1.Duracao = 200;
-musica1.Disponivel = true;
 
-musica2.Nome = "Radioactive";
-musica2.Duracao = 120;
-musica2.Disponivel = false;
+Musica musica2 = new Musica(imagineDragons, "Radioactive") 
+{ 
+    Disponivel = true,
+    Duracao = 358
+};
 
-musica3.Nome = "Demons";
-musica3.Duracao = 120;
-musica3.Disponivel = true;
+Musica musica3 = new Musica(imagineDragons, "Demons")
+{
+    Duracao = 258,
+    Disponivel = false
+};
 
-Album album = new Album();
-
-album.Nome = "Night Visions";
+Album album = new Album("Night Visions");
 
 //Adicionando músicas no álbum
 album.AdicionarMusica(musica1);
@@ -36,4 +37,12 @@ Console.WriteLine("\n");
 //Adicionando e exibindo um álbum na classe banda
 imagineDragons.AdicionarAlbum(album);
 imagineDragons.ExibirDiscografia();
+
+//Exibindo a ficha técnica das músicas
+Console.WriteLine("\n");
+musica1.ExibirFichaTecnica();
+Console.WriteLine("\n");
+musica2.ExibirFichaTecnica();
+Console.WriteLine("\n");
+musica3.ExibirFichaTecnica();
 

@@ -4,13 +4,14 @@ public class Musica
 {
 
     //Criando o construtor da classe
-    public Musica(Banda artista)
+    public Musica(Banda artista, string nome)
     {
         Artista = artista;
+        Nome = nome;
     }
 
-    public string Nome { get; set; }
-    public Banda Artista { get;  }
+    public string Nome { get; }
+    public Banda Artista { get;}
     public int Duracao { get; set; }
 
     /*
@@ -25,7 +26,7 @@ public class Musica
     public void ExibirFichaTecnica()
     {
         Console.WriteLine($"Nome: {Nome}");
-        Console.WriteLine($"Artista: {Artista}");
+        Console.WriteLine($"Artista: {Artista.Nome}");
         Console.WriteLine($"Duração: {Duracao}");
         if (Disponivel)
         {

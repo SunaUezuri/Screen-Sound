@@ -1,7 +1,14 @@
 ﻿public class Banda
 {
+
     private List<Album> albums = new List<Album>();
-    public string Nome { get; set; }
+    public string Nome { get; }
+
+    //Construtor da classe banda:
+    public Banda(string nome)
+    {
+        Nome = nome;
+    }
 
     //Método para inserir Álbums na lista
     public void AdicionarAlbum(Album album)
