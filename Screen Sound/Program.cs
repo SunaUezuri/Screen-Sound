@@ -46,3 +46,28 @@ musica2.ExibirFichaTecnica();
 Console.WriteLine("\n");
 musica3.ExibirFichaTecnica();
 
+//Instanciando as classes em questão
+Episodio episodio1 = new Episodio(1, "A vida de um estudante de T.I", 2.5);
+
+Episodio episodio2 = new Episodio(2, "Como é programar em JAVA", 4);
+
+
+
+//Adicionando um convidado ao episódio
+episodio1.AdicionarConvidados("Wesley");
+episodio2.AdicionarConvidados("Samara");
+
+Podcast podcast = new Podcast("Leandro Figueira", "A vida em códigos");
+
+//Adicionando os episódios:
+podcast.AdicionarEpisodios(episodio1);
+podcast.AdicionarEpisodios(episodio2);
+
+//Exibindo os detalhes do episódio
+Console.WriteLine(episodio1.Resumo);
+Console.WriteLine(episodio2.Resumo);
+
+//Exibindo os detalhes do podcast:
+podcast.ExibirDetalhes();
+
+
