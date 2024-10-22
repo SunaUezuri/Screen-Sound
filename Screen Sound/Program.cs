@@ -1,73 +1,215 @@
-﻿//Criando um objeto para a música e Banda:
-Banda imagineDragons = new Banda("Imagine Dragons");
+﻿
+//Screen Sound
+string mensagemDeBoasVindas = "Bem-vindo ao Screen Sound!";
 
-//Criando a classe música e inserindo suas informações pelo construtor
-Musica musica1 = new Musica(imagineDragons, "It´s Time")
+/*Criando uma lista para as bandas
+List<string> bandas = new List<string> { "Set it Off", "Imagine Dragons", "Aestheria"};
+*/
+
+//Criando um dicionário de listas
+Dictionary<string, List<int>> bandasDict = new Dictionary<string, List<int>>();
+
+//Adicionando bandas
+bandasDict.Add("Imagine Dragons", new List<int> { 10, 8, 9 });
+bandasDict.Add("Set it Off", new List<int>());
+
+//Criando uma função que irá reaproveitar as linhas.
+void ExibirLogo()
 {
-    //Utiliza-se este tipo de dado para quando as informações não são obrigatórias
-    Duracao = 200,
-    Disponivel = true
-};
+    Console.WriteLine(@"
+    
+░██████╗░█████╗░██████╗░███████╗███████╗███╗░░██╗  ░██████╗░█████╗░██╗░░░██╗███╗░░██╗██████╗░
+██╔════╝██╔══██╗██╔══██╗██╔════╝██╔════╝████╗░██║  ██╔════╝██╔══██╗██║░░░██║████╗░██║██╔══██╗
+╚█████╗░██║░░╚═╝██████╔╝█████╗░░█████╗░░██╔██╗██║  ╚█████╗░██║░░██║██║░░░██║██╔██╗██║██║░░██║
+░╚═══██╗██║░░██╗██╔══██╗██╔══╝░░██╔══╝░░██║╚████║  ░╚═══██╗██║░░██║██║░░░██║██║╚████║██║░░██║
+██████╔╝╚█████╔╝██║░░██║███████╗███████╗██║░╚███║  ██████╔╝╚█████╔╝╚██████╔╝██║░╚███║██████╔╝
+╚═════╝░░╚════╝░╚═╝░░╚═╝╚══════╝╚══════╝╚═╝░░╚══╝  ╚═════╝░░╚════╝░░╚═════╝░╚═╝░░╚══╝╚═════╝░
+");
+    Console.WriteLine(mensagemDeBoasVindas);
+}
 
-
-Musica musica2 = new Musica(imagineDragons, "Radioactive") 
-{ 
-    Disponivel = true,
-    Duracao = 358
-};
-
-Musica musica3 = new Musica(imagineDragons, "Demons")
+//Criando a função para exibir as opções do menu
+void ExibirMenu()
 {
-    Duracao = 258,
-    Disponivel = false
-};
-
-Album album = new Album("Night Visions");
-
-//Adicionando músicas no álbum
-album.AdicionarMusica(musica1);
-album.AdicionarMusica(musica2);
-album.AdicionarMusica(musica3);
-
-//Exibindo as músicas do albúm
-album.ExibirMusicasDoAlbum();
-
-Console.WriteLine("\n");
-
-//Adicionando e exibindo um álbum na classe banda
-imagineDragons.AdicionarAlbum(album);
-imagineDragons.ExibirDiscografia();
-
-//Exibindo a ficha técnica das músicas
-Console.WriteLine("\n");
-musica1.ExibirFichaTecnica();
-Console.WriteLine("\n");
-musica2.ExibirFichaTecnica();
-Console.WriteLine("\n");
-musica3.ExibirFichaTecnica();
-
-//Instanciando as classes em questão
-Episodio episodio1 = new Episodio(1, "A vida de um estudante de T.I", 2.5);
-
-Episodio episodio2 = new Episodio(2, "Como é programar em JAVA", 4);
+    ExibirLogo();
+    Console.WriteLine("\nDigite 1 para registrar uma banda");
+    Console.WriteLine("Digite 2 para listar todas as bandas");
+    Console.WriteLine("Digite 3 para avaliar uma banda");
+    Console.WriteLine("Digite 4 para exibir a média uma banda");
+    Console.WriteLine("Digite -1 para sair");
 
 
-
-//Adicionando um convidado ao episódio
-episodio1.AdicionarConvidados("Wesley");
-episodio2.AdicionarConvidados("Samara");
-
-Podcast podcast = new Podcast("Leandro Figueira", "A vida em códigos");
-
-//Adicionando os episódios:
-podcast.AdicionarEpisodios(episodio1);
-podcast.AdicionarEpisodios(episodio2);
-
-//Exibindo os detalhes do episódio
-Console.WriteLine(episodio1.Resumo);
-Console.WriteLine(episodio2.Resumo);
-
-//Exibindo os detalhes do podcast:
-podcast.ExibirDetalhes();
+    //Pedindo um input do usuário
+    Console.Write("\nDigite a sua opção: ");
+    int opcaoEscolhida = int.Parse(Console.ReadLine()!); //! = Neste caso impede que o usuário insira um valor nulo
 
 
+    switch (opcaoEscolhida)
+    {
+        case 1:
+            RegistrarBanda();
+            break;
+
+        case 2:
+            MostrarBandas();
+            break;
+
+        case 3:
+            AvaliarBanda();
+            break;
+
+        case 4:
+            ExibirMedia();
+            break;
+
+        case -1:
+            Console.WriteLine("Operação cancelada!");
+            break;
+
+        default:
+            Console.WriteLine("Opção inválida!");
+            break;
+    }
+}
+
+//Criando a função para registrar uma banda
+void RegistrarBanda()
+{
+    //Comando para limpar o console
+    Console.Clear();
+
+    Console.WriteLine(@"
+█▀█ █▀▀ █▀▀ █ █▀ ▀█▀ █▀█ █▀█   █▀▄ █▀▀   █▄▄ ▄▀█ █▄░█ █▀▄ ▄▀█ █▀
+█▀▄ ██▄ █▄█ █ ▄█ ░█░ █▀▄ █▄█   █▄▀ ██▄   █▄█ █▀█ █░▀█ █▄▀ █▀█ ▄█");
+    Console.Write("\nDigite o nome da banda que deseja registrar: ");
+    string banda = Console.ReadLine()!;
+
+
+    //Adicionando o conteúdo em um dicionário
+    bandasDict.Add(banda, new List<int>());
+
+    Console.WriteLine($"\nA banda {banda} foi registrada com sucesso!");
+
+    /*Função para dar uma pausa e limpar o console retornando para o menu
+     * Após a operação
+    */
+    Thread.Sleep(2000);
+    Console.Clear();
+    ExibirMenu();
+}
+
+//Função para mostrar as bandas registradas
+void MostrarBandas()
+{
+    Console.Clear();
+
+    Console.WriteLine(@"
+█▀▀ ▀▄▀ █ █▄▄ █ █▀▀ ▄▀█ █▀█   █▀▄ █▀▀   █▄▄ ▄▀█ █▄░█ █▀▄ ▄▀█ █▀
+██▄ █░█ █ █▄█ █ █▄▄ █▀█ █▄█   █▄▀ ██▄   █▄█ █▀█ █░▀█ █▄▀ █▀█ ▄█");
+
+
+    //Utilizando o "foreach" para exibir as chaves do dicionário
+    foreach (string banda in bandasDict.Keys)
+    {
+        Console.WriteLine($"\nBanda: {banda}");
+    }
+
+
+    Console.WriteLine("\nDigite uma tecla para voltar para o menu inicial.");
+
+    //Comando para digitar uma tecla e ser redirecionado para o menu
+    Console.ReadKey();
+    Console.Clear();
+    ExibirMenu();
+}
+
+//Função para exibir o título da opção
+void ExibirOpcao(string titulo)
+{
+    int qntLetras = titulo.Length;
+    string asteriscos = string.Empty.PadLeft(qntLetras, '*');
+    Console.WriteLine(asteriscos);
+    Console.WriteLine(titulo);
+    Console.WriteLine(asteriscos + "\n");
+}
+
+//Função para avaliar uma banda
+void AvaliarBanda()
+{
+    /*Digite a banda que deseja avaliar
+     se a banda existir no dicionário -> avaliar a banda
+    senão, volta ao menu pricipal
+     */
+
+    Console.Clear();
+    ExibirOpcao("Avaliando Bandas");
+    Console.Write("Coloque a banda que deseja avaliar");
+
+    string nomeBanda = Console.ReadLine()!;
+
+    //Vendo se existe a chave
+    if (bandasDict.ContainsKey(nomeBanda))
+    {
+        Console.Write($"\nQual nota que a banda {nomeBanda} merece?: ");
+
+        int nota = int.Parse(Console.ReadLine()!);
+
+        if (nota > 10)
+        {
+            Console.WriteLine("Não pode se atribuir uma nota maior que 10");
+        }
+        else
+        {
+            bandasDict[nomeBanda].Add(nota);
+            Console.WriteLine($"\nA nota foi registrada com sucesso para a banda {nomeBanda}");
+        }
+
+        Thread.Sleep(4000);
+        Console.Clear();
+        ExibirMenu();
+    }
+    else
+    {
+        Console.WriteLine($"\nA banda {nomeBanda} não foi encontrada!");
+        Console.WriteLine("\nDigite uma tecla para voltar ao menu principal: ");
+        Console.ReadKey();
+        Console.Clear();
+        ExibirMenu();
+    }
+}
+
+//Função para exibir a média de notas da banda
+void ExibirMedia()
+{
+    Console.Clear();
+    ExibirOpcao("Média de notas");
+
+    //Pedindo a banda que o usuário deseja ver a média de notas
+    Console.Write("Insira o nome da banda: ");
+
+    string banda = Console.ReadLine()!;
+
+    //Verificando se a banda existe
+    if (bandasDict.ContainsKey(banda))
+    {
+        double media = bandasDict[banda].Average();
+
+        Console.WriteLine($"\nA média de notas da banda {banda} é {media}");
+
+        Console.WriteLine("\nDigite qualquer tecla para voltar ao menu principal.");
+        Console.ReadKey();
+        Console.Clear();
+        ExibirMenu();
+    }
+    else
+    {
+        Console.WriteLine($"\nA banda {banda} não foi encontrada!");
+        Console.WriteLine("\nDigite uma tecla para voltar ao menu principal: ");
+        Console.ReadKey();
+        Console.Clear();
+        ExibirMenu();
+    }
+}
+
+//Chamando a Função
+ExibirMenu();
